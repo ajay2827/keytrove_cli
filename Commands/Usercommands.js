@@ -3,9 +3,6 @@ const program=require('commander')
 const {prompt} = require('inquirer')
 const addUser=require('../controllers/addUser')
 
-
-// const User=require('./models/User')
-
 program
 .version('1.0.0')
 .description('This is our KeyStore CLI Application')
@@ -18,7 +15,7 @@ const questions=[
     },
     {
         type:"input",
-       name:"email",
+        name:"email",
         message:"Customer Email"
     },
     {
