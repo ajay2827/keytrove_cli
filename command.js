@@ -1,27 +1,31 @@
+#!/usr/bin/env node
 const { program } = require('commander');
 const { prompt } = require('inquirer') ;
-const {addUser , signIn} = require('./index');
+const SignUp=require('./controllers/SignUp')
+const SignIn=require('./controllers/SignIn')
+const connectDB=require('./db/connect')
 const { question_signin , question_signup , question_keyvalue} = require('./question')
 
+connectDB()
 
 program
 .version('1.1.1')
 .description('Key Value Store Npm ')
 
 program
-.command('Signup')
+.command('signup')
 .alias('a')
 .description('Add a user')
 .action(()=>{
-  prompt(question_signup).then(ans=> addUser(ans)) ;
+  prompt(question_signup).then(ans=> SignUp(ans)) ;
 }) ;
 
 program
-.command('SignIn')
+.command('signin')
 .alias('a')
 .description('Signining user')
 .action(()=>{
-  prompt(question_signin).then(ans=> signIn(ans)) ;
+  prompt(question_signin).then(ans=> SignIn(ans)) ;
 }) ;
 
 // program
