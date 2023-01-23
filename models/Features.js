@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const KeysSchema= new mongoose.Schema( 
 
     {
-        user_id:
+        user_email:
         {
             type:string,
             require:true,
@@ -22,13 +22,7 @@ const KeysSchema= new mongoose.Schema(
             value:String,
             unique:true,
             require:true
-        },
-        key_id:
-        {
-            type:String,
-            unique:true,
-            require:true
-        },
+        }
     }
     ,{
         timestamps:true
