@@ -2,6 +2,7 @@ const mongoose = require('mongoose') ;
 const User = require('../models/User') ;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const SignIn = async (user) =>{
      try

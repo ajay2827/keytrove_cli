@@ -9,7 +9,7 @@ const { question_signin , question_signup , question_keyvalue} = require('./ques
 connectDB()
 
 program
-.version('1.1.1')
+.version('1.0.0')
 .description('Key Value Store Npm ')
 
 program
