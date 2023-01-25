@@ -1,26 +1,19 @@
 const mongoose=require('mongoose'); 
 
 const KeysSchema= new mongoose.Schema( 
-
     {
-        user_email:
-        {
-            type:string,
-            require:true,
-            unique:true
-        },
         key:
         {
-            type:Mixed,
-            value:String,
-            unique:true,
+            type:String,
             require:true
         },
         value:
         {
-            type:Mixed,
-            value:String,
-            unique:true,
+            type:String,
+            require:true
+        },
+        email:{
+            type:String,
             require:true
         }
     }
@@ -29,6 +22,4 @@ const KeysSchema= new mongoose.Schema(
     }
 )
 
-module.exports=mongoose.model("Keys",KeysSchema);
-
-// 47mspnZswrIYfyv1
+module.exports=mongoose.model("Key",KeysSchema);
