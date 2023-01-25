@@ -1,7 +1,7 @@
 Key = require('../models/Features')
 const authFunction = require('../auth')
 const {client} = require('../db/Redis');
-const UpDate=async(value,data)=>{
+const UpDate=async(id,data)=>{
     
     try {
         const email = await authFunction()
@@ -10,19 +10,19 @@ const UpDate=async(value,data)=>{
             return
         }
     
-    const features = await Key.find({ email:email , value:value}) ;
-    features.map(async(feature) =>{
-        if ( data.Expiration_Time == -1 ) {
-            await client.set(`${feature._id}` , `1`) ;
-        }else {
-            await client.setex(`${feature._id}` , data.Expiration_Time , '1' ) ;
-        }
-        await Key.updateOne({_id:feature._id},{$set:{key:data.key,value:data.value}})
-        console.log("key Updated")
-        return ;
-    })
+     
+    if ( data.Expiration_Time == -1 ) {
+                await client.set(`${id}` , `1`) ;
+            }else {
+                await client.setex(`${id}` , data.Expiration_Time , '1' ) ;
+            }
+            await Key.updateOne({_id:id},{$set:{key:data.key,value:data.value}})
+            console.log("key Updated")
    
-
+            const fun = () =>{
+                process.exit(0) ;
+            }
+            setTimeout(fun, 1000);
 
     } catch (error) {
         console.log(error);

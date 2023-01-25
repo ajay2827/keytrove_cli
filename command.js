@@ -8,10 +8,12 @@ const Get=require('./controllers/Get')
 const GetAll=require('./controllers/GetAll')
 const UpDate=require('./controllers/Update')
 const Delete=require('./controllers/Delete')
-const connectDB=require('./db/connect')
+const UpdateList=require('./controllers/Updatelist')
+const {connectDB}=require('./db/connect')
 const { question_signin , question_signup , question_keyvalue} = require('./question')
 
-connectDB()
+ connectDB()
+
 
 program
 .version('1.0.0')
@@ -57,26 +59,31 @@ program
 .command('updatelist')
 .alias('ul')
 .description('give list of updated key-value')
-.action(()=>GetAll())
+.action(()=>UpdateList())
 
 program
-.command('update <value>')
+.command('update <id>')
 .alias('u')
 .description('update a key-value of user')
-.action(value=>{
-  prompt(question_keyvalue).then(ans=>UpDate(value,ans))
+.action(id=>{
+  prompt(question_keyvalue).then(ans=>UpDate(id,ans))
 })
 
 program
 .command('removelist')
 .alias('rl')
 .description('give list of key-value want to remove')
-.action(()=>GetAll())
+.action(()=>UpdateList())
 
 program
-.command('remove <key>')
+.command('remove <id>')
 .alias('r')
 .description('remove key-value of user')
-.action(key=>Delete(key))
+.action(id=>Delete(id))
+
+
 
 program.parse(process.argv) ;
+
+
+

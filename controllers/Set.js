@@ -22,6 +22,10 @@ const Set = async (data) => {
             client.setex(`${keydata._id}` , data.Expiration_Time , '1' ) ;
         }
        console.log("Key Added") ;
+       const fun = () =>{
+        process.exit(0) ;
+    }
+    setTimeout(fun, 1000);
     }
     catch (error) {
         console.log(error);

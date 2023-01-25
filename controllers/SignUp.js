@@ -19,6 +19,10 @@ const SignUp = async (user) => {
     console.log(process.env.ASSIGN_JWT);
     console.info('user Added ..');
     //   db.close() ;
+    const fun = () =>{
+      process.exit(0) ;
+  }
+  setTimeout(fun, 1000);
   }
   catch (error) {
     console.log(error);
