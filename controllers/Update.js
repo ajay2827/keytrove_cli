@@ -11,9 +11,7 @@ const UpDate=async(value,data)=>{
         }
     
     const features = await Key.find({ email:email , value:value}) ;
-    console.log(features)
     features.map(async(feature) =>{
-        console.log("hello")
         if ( data.Expiration_Time == -1 ) {
             await client.set(`${feature._id}` , `1`) ;
         }else {

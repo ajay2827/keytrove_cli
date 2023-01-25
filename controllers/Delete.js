@@ -9,12 +9,13 @@ const Delete=async(key)=>{
             console.log('SignIn to use this functionality');
             return
         }
-        const features=await Key.find({key:key})
+        const features=await Key.find({email:email , key:key})
         features.map(async(feature)=>{
             const val = await client.get(`${feature._id}`) ;
             if ( val == 1 ) {
                 await client.del(`${feature._id}`) ;
             }
+            Key.deleteOne({_id:feature._id}) ;
         })
         console.log(`Key ${key} deleted`) ;
     } catch (error) {
