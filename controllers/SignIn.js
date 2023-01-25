@@ -27,6 +27,10 @@ const SignIn = async (user) =>{
               return;
           });
           console.log("signined .") ; 
+          const fun = () =>{
+            process.exit(0) ;
+        }
+        setTimeout(fun, 1000);
      }
      catch(err)
      {
