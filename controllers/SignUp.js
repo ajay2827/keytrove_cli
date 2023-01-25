@@ -1,34 +1,28 @@
-const mongoose = require('mongoose') ;
-const User = require('../models/User') ;
+const mongoose = require('mongoose');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
-const SignUp = async (user) =>{
+const SignUp = async (user) => {
 
-    try{
-        const exist = await User.find({email:user.email}) ;
-    
-    if ( exist.length !== 0 ) {
+  try {
+    const RepUser = await User.find({ email: user.email });
+
+    if (RepUser.length !== 0) {
       console.info('User Exist With this Email ');
-      return ;
+      return;
     }
-    const salt = await bcrypt.genSalt(10);
-    const hashpassword = await bcrypt.hash(user.password, salt);
-    const object = {
-      "name":user.name,
-      "email":user.email,
-      "password":hashpassword
-    }
-    const data = await User.create(object) ;
-    const authtoken = jwt.sign(user.email , process.env.JWT_SECRET) ;
-    console.log(authtoken) ;
-    console.info('user Added ..') ;
-  //   db.close() ;
-    }
-    catch(error)
-    {
-        console.log(error);
-    }
+    const NewUser = await User.create(user);
+    const authtoken = NewUser.createJWT()
+    process.env.ASSIGN_JWT=authtoken
+    console.log(process.env.ASSIGN_JWT);
+    console.info('user Added ..');
+    //   db.close() ;
+  }
+  catch (error) {
+    console.log(error);
+  }
 }
 
-module.exports=SignUp
+module.exports = SignUp

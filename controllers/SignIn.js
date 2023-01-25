@@ -2,6 +2,8 @@ const mongoose = require('mongoose') ;
 const User = require('../models/User') ;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const fs = require('fs');
 
 const SignIn = async (user) =>{
      try
@@ -11,14 +13,19 @@ const SignIn = async (user) =>{
             console.info('Please SignUp First Then SignIn'); ;
             return ;
           }
-          console.log(exist[0].password) ;
-          const passwordCompare = await bcrypt.compare(user.password , exist[0].password) ;
+          
+          const passwordCompare = await exist[0].comparePassword(user.password) ;
           if ( !passwordCompare ) {
             console.info("Use Correct Password") ;
             return ;
           }
-          const authtoken = jwt.sign(user.email , process.env.JWT_SECRET) ;
+          const authtoken = await exist[0].createJWT()
           console.log(authtoken) ;
+          fs.writeFile("authToken.txt", authtoken, (err) => {
+            if (err)
+              console.log('SignIn Again');
+              return;
+          });
           console.log("signined .") ; 
      }
      catch(err)
