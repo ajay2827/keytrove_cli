@@ -1,5 +1,6 @@
 const Key = require('../models/Features')
 const authFunction = require('../auth')
+const {client , Redis} = require('../db/Redis') ;
 
 const Set = async (data) => {
     try {
@@ -13,9 +14,14 @@ const Set = async (data) => {
             value:data.value,
             email:email
         }
-        await Key.create(NewData).then(NewData => {
-            console.info('key value data is added');
-        })
+        const keydata = await Key.create(NewData)
+       
+        if ( data.Expiration_Time == -1 ) {
+            client.set(`${keydata._id}` , `1`) ;
+        }else {
+            client.setex(`${keydata._id}` , data.Expiration_Time , '1' ) ;
+        }
+       console.log("Key Added") ;
     }
     catch (error) {
         console.log(error);

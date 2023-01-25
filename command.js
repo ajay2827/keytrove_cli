@@ -74,9 +74,9 @@ program
 .action(()=>GetAll())
 
 program
-.command('remove <value>')
+.command('remove <key>')
 .alias('r')
 .description('remove key-value of user')
-.action(value=>Delete(value))
+.action(key=>Delete(key))
 
 program.parse(process.argv) ;

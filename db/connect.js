@@ -7,7 +7,7 @@ const connectDB =  async () =>{
   const db = await mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(console.log("DataBase is Connected "))
+}).then()
 .catch((err)=>
     console.log(err)
 );

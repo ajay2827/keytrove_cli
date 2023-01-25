@@ -1,6 +1,6 @@
 Key = require('../models/Features')
 const authFunction = require('../auth')
-
+const {client} = require('../db/Redis');
 const UpDate=async(value,data)=>{
     
     try {
@@ -9,10 +9,19 @@ const UpDate=async(value,data)=>{
             console.log('SignIn to use this functionality');
             return
         }
-     await Key.updateOne({value:value},{$set:{key:data.key,value:data.value}})
-     .then(data=>{
-        console.info('Key value updated')
-     });
+    
+    const features = await Key.find({value:value}) ;
+
+    features.map(async(feature) =>{
+        if ( data.Expiration_Time == -1 ) {
+            client.set(`${feature._id}` , `1`) ;
+        }else {
+            client.setex(`${feature._id}` , data.Expiration_Time , '1' ) ;
+        }
+        await Key.updateOne({_id:feature._id},{$set:{key:data.key,value:data.value}})
+        console.log("key Updated")
+        return ;
+    })
 
     } catch (error) {
         console.log(error);
