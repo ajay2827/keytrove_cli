@@ -12,6 +12,7 @@ const GetAll=async()=>{
         features.map(async (feature) => {
             const val = await client.get(`${feature._id}`) ;
             if ( val == 1 ) {
+                flag = true ;
                 console.log(`${feature.key} -> ${feature.value}`);
             }
         })   

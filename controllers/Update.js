@@ -10,18 +10,21 @@ const UpDate=async(value,data)=>{
             return
         }
     
-    const features = await Key.find({value:value}) ;
-
+    const features = await Key.find({ email:email , value:value}) ;
+    console.log(features)
     features.map(async(feature) =>{
+        console.log("hello")
         if ( data.Expiration_Time == -1 ) {
-            client.set(`${feature._id}` , `1`) ;
+            await client.set(`${feature._id}` , `1`) ;
         }else {
-            client.setex(`${feature._id}` , data.Expiration_Time , '1' ) ;
+            await client.setex(`${feature._id}` , data.Expiration_Time , '1' ) ;
         }
         await Key.updateOne({_id:feature._id},{$set:{key:data.key,value:data.value}})
         console.log("key Updated")
         return ;
     })
+   
+
 
     } catch (error) {
         console.log(error);

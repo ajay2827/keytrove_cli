@@ -13,15 +13,13 @@ const Get = async (key) => {
             console.info('Enter a valid key');
             return;
         }
-        
         features.map( async(feature) => {
             const val = await client.get(`${feature._id}`) ;
-           
             if ( val == 1 ) {
                 console.log(`${feature.key} -> ${feature.value}`);
             }
         })
-        
+    
 
     } catch (error) {
         console.log(error);
