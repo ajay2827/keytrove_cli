@@ -33,12 +33,10 @@ const question_keyvalue = [
     {
         type: 'input',
         name:'key',
-        message:'Enter Email id --> '
     },
     {
         type:'input',
         name:'value',
-        message:'Enter password --> '
     }
 ] ;
 
