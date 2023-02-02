@@ -10,16 +10,11 @@ const Delete=async(id)=>{
             return
         }
         const feature=await Key.find({email:email, _id:id})
-        console.log(email);
-          console.log(feature) ;
             const val = await client.get(`${feature._id}`) ;
-            console.log('1');
             if ( val == 1 ) {
                 await client.del(`${feature._id}`) ;
             }
-            console.log("2");
             await Key.deleteOne({email:email ,_id:id}) ;
-            console.log('3');
         
         console.log(`Key ${feature[0].key} deleted`) ;
         const fun = () =>{
