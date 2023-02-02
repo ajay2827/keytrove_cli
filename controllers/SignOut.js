@@ -1,8 +1,10 @@
 const fs = require('fs');
+const path=require('path')
 
 const SignOut=async ()=>{
     try {
-        await fs.unlink('authToken.txt', function (err) {
+        const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+        await fs.unlink(filePath, function (err) {
             if (err) 
             console.log(err);
         

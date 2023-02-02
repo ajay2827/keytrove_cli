@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken');
 
 
 
-router.post('/signup' ,[
+router.post('/' ,[
   body('name' , 'name must be atleast 3 character').isLength({ min: 3 }),
     body('email' , 'Enter A valid email').isEmail(),
     body('password' , 'Enter a valid password').isLength({ min: 5 })

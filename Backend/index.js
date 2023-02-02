@@ -3,6 +3,8 @@ const express = require('express') ;
 const app = express() ;
 const Signup = require('./Routes/Signup')
 const Signin = require('./Routes/Signin')
+const Set=require('./Routes/Set')
+const Get=require('./Routes/Get')
 require('dotenv').config() ;
 
 const port = 5055 ;
@@ -37,3 +39,5 @@ app.get('/' , (req,res)=>{
 })
 app.use('/signup' , Signup)
 app.use('/signin' , Signin)
+app.use('/setkey',Set)
+app.use('/getkey',Get)

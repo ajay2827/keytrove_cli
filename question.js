@@ -40,7 +40,7 @@ const question_keyvalue = [
     },
     {
         type:'input',
-        name:'Expiration_Time',
+        name:'ttl',
         default:-1 
     }
 ] ;
