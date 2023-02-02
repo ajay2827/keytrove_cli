@@ -3,14 +3,21 @@ const mongoose = require('mongoose') ;
 mongoose.Promise = global.Promise ;
 mongoose.set('strictQuery', false);
 
+// const db = mongoose.createConnection()
 const connectDB =  async () =>{
-  const db = await mongoose.connect(process.env.MONGO_URL,{
+  await mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(console.log("DataBase is Connected "))
+})
 .catch((err)=>
     console.log(err)
 );
 }
 
-module.exports = connectDB ;
+const disconnectDB = () =>{
+  // mongoose.connection.close(function(){
+  //   console.log('Mongoose default connection disconnected through app termination');
+  //   process.exit(0);
+  //   });
+}
+module.exports = {connectDB , disconnectDB} ;
