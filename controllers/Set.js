@@ -1,34 +1,28 @@
-const Key = require('../models/Features')
-const authFunction = require('../auth')
-const {client , Redis} = require('../db/Redis') ;
+const setpath='http://localhost:5055/setkey'
+const fs = require('fs');
+const axios = require( 'axios' );
+const path=require('path')
 
 const Set = async (data) => {
-    try {
-        const email = await authFunction()
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-        const NewData={
-            key:data.key,
-            value:data.value,
-            email:email
-        }
-        const keydata = await Key.create(NewData)
-       
-        if ( data.Expiration_Time == -1 ) {
-            client.set(`${keydata._id}` , `1`) ;
-        }else {
-            client.setex(`${keydata._id}` , data.Expiration_Time , '1' ) ;
-        }
-       console.log("Key Added") ;
-       const fun = () =>{
-        process.exit(0) ;
+    const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+    const authtoken = fs.readFileSync(filePath, 'utf8')
+    const data1 = {
+        "key":data.key,
+        "value":data.value,
+        'ttl':data.ttl,
+        "authtoken":authtoken
     }
-    setTimeout(fun, 1000);
+    try {
+       await axios.post(setpath,data1).
+       then((res)=>{
+        console.log("key added");
+        process.exit(0);
+       })
+    
     }
     catch (error) {
         console.log(error);
+        process.exit(0);
     }
 
 }

@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 // http://localhost:5055/signin/signin
 
 
-router.post('/signin' ,[
+router.post('/' ,[
     body('email' , 'Enter A valid email').isEmail(),
     body('password' , 'Enter a valid password').isLength({ min: 5 })
 ], async (req,res)=>{

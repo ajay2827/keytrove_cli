@@ -3,9 +3,9 @@ const { program } = require('commander');
 const { prompt } = require('inquirer') ;
 const SignUp=require('./controllers/SignUp')
 const SignIn=require('./controllers/SignIn')
-// const SignOut=require('./controllers/SignOut')
-// const Set=require('./controllers/Set')
-// const Get=require('./controllers/Get')
+const SignOut=require('./controllers/SignOut')
+const Set=require('./controllers/Set')
+const Get=require('./controllers/Get')
 // const GetAll=require('./controllers/GetAll')
 // const UpDate=require('./controllers/Update')
 // const Delete=require('./controllers/Delete')
@@ -36,25 +36,25 @@ program
   prompt(question_signin).then(ans=> SignIn(ans)) ;
 }) ;
 
-// program
-// .command('signout')
-// .alias('a')
-// .description('SignOut User')
-// .action(()=>SignOut()) ;
+program
+.command('signout')
+.alias('a')
+.description('SignOut User')
+.action(()=>SignOut()) ;
 
-// program
-// .command('set')
-// .alias('s')
-// .description('setting key value data')
-// .action(()=>{
-//   prompt(question_keyvalue).then(ans=>Set(ans))
-// })
+program
+.command('set')
+.alias('s')
+.description('setting key value data')
+.action(()=>{
+  prompt(question_keyvalue).then(ans=>Set(ans))
+})
 
-// program
-// .command('get <key>')
-// .alias('g')
-// .description('getting key value data')
-// .action(key=>Get(key))
+program
+.command('get <key>')
+.alias('g')
+.description('getting key value data')
+.action(key=>Get(key))
 
 // program
 // .command('list')
