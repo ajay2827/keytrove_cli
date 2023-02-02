@@ -1,6 +1,6 @@
 const Key = require('../models/Features')
 const authFunction = require('../auth')
-
+const {client , Redis} = require('../db/Redis') ;
 const Get = async (key) => {
     try {
         const email = await authFunction()
@@ -13,11 +13,17 @@ const Get = async (key) => {
             console.info('Enter a valid key');
             return;
         }
-
-        features.map((feature) => {
-            console.log(`${feature.key} -> ${feature.value}`);
+        features.map( async(feature) => {
+            const val = await client.get(`${feature._id}`) ;
+            if ( val == 1 ) {
+                console.log(`${feature.key} -> ${feature.value}`);
+            }
         })
-
+    
+        const fun = () =>{
+            process.exit(0) ;
+        }
+        setTimeout(fun, 1000);
     } catch (error) {
         console.log(error);
     }

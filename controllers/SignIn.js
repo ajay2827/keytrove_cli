@@ -1,37 +1,26 @@
-const mongoose = require('mongoose') ;
-const User = require('../models/User') ;
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-require('dotenv').config()
+const signinurl = 'http://localhost:5055/signin/signin'
 const fs = require('fs');
+const axios = require( 'axios' );
+const path=require('path')
 
 const SignIn = async (user) =>{
-     try
-     {
-        const exist = await User.find({email:user.email}) ; 
-        if ( exist.length === 0 ) {
-            console.info('Please SignUp First Then SignIn'); ;
-            return ;
-          }
-          
-          const passwordCompare = await exist[0].comparePassword(user.password) ;
-          if ( !passwordCompare ) {
-            console.info("Use Correct Password") ;
-            return ;
-          }
-          const authtoken = await exist[0].createJWT()
-          console.log(authtoken) ;
-          fs.writeFile("authToken.txt", authtoken, (err) => {
-            if (err)
-              console.log('SignIn Again');
-              return;
-          });
-          console.log("signined .") ; 
-     }
-     catch(err)
-     {
-        console.log(err);
-     }
+  try {
+    await axios.post(signinurl , user).
+    then(async (res)=>{
+      const token = res.data.authtoken
+      // console.log(token) ;
+      const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+      fs.writeFile(filePath, token, (err) => {
+        if (err)
+          console.log('SignIn Again');
+          return;
+      });
+    })
+    console.log("signined success") ;
+  }
+  catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports=SignIn

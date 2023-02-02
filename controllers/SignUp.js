@@ -1,24 +1,24 @@
-const mongoose = require('mongoose');
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-require('dotenv').config()
+const axios = require( 'axios' );
+const signupurl = 'http://localhost:5055/signup/signup'
+const fs = require('fs');
+const path=require('path')
 
 const SignUp = async (user) => {
 
   try {
-    const RepUser = await User.find({ email: user.email });
-
-    if (RepUser.length !== 0) {
-      console.info('User Exist With this Email ');
-      return;
-    }
-    const NewUser = await User.create(user);
-    const authtoken = NewUser.createJWT()
-    process.env.ASSIGN_JWT=authtoken
-    console.log(process.env.ASSIGN_JWT);
-    console.info('user Added ..');
-    //   db.close() ;
+    await axios.post(signupurl , user).
+    then(async (res)=>{
+      const data =   res ;
+      const token = data.data.authtoken
+      console.log(token) ;
+      const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+      fs.writeFile(filePath, token, (err) => {
+        if (err)
+          console.log(err);
+          return;
+      });
+      console.log('123');
+    })
   }
   catch (error) {
     console.log(error);
