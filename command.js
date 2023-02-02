@@ -3,7 +3,7 @@ const { program } = require('commander');
 const { prompt } = require('inquirer') ;
 const SignUp=require('./controllers/SignUp')
 const SignIn=require('./controllers/SignIn')
-// const SignOut=require('./controllers/SignOut')
+const SignOut=require('./controllers/SignOut')
 // const Set=require('./controllers/Set')
 // const Get=require('./controllers/Get')
 // const GetAll=require('./controllers/GetAll')
@@ -36,11 +36,11 @@ program
   prompt(question_signin).then(ans=> SignIn(ans)) ;
 }) ;
 
-// program
-// .command('signout')
-// .alias('a')
-// .description('SignOut User')
-// .action(()=>SignOut()) ;
+program
+.command('signout')
+.alias('a')
+.description('SignOut User')
+.action(()=>SignOut()) ;
 
 // program
 // .command('set')

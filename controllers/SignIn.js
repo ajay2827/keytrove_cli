@@ -1,16 +1,16 @@
 const signinurl = 'http://localhost:5055/signin/signin'
 const fs = require('fs');
 const axios = require( 'axios' );
-
+const path=require('path')
 
 const SignIn = async (user) =>{
   try {
     await axios.post(signinurl , user).
     then(async (res)=>{
-      const data =   res ;
-      const token = data.data.authtoken
+      const token = res.data.authtoken
       // console.log(token) ;
-      fs.writeFile("authToken.txt", token, (err) => {
+      const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+      fs.writeFile(filePath, token, (err) => {
         if (err)
           console.log('SignIn Again');
           return;
