@@ -5,6 +5,9 @@ const Signup = require('./Routes/Signup')
 const Signin = require('./Routes/Signin')
 const Set=require('./Routes/Set')
 const Get=require('./Routes/Get')
+const GetAll=require('./Routes/GetAll')
+const Update=require('./Routes/Update')
+const Remove=require('./Routes/Remove')
 require('dotenv').config() ;
 
 const port = 5055 ;
@@ -41,3 +44,6 @@ app.use('/signup' , Signup)
 app.use('/signin' , Signin)
 app.use('/setkey',Set)
 app.use('/getkey',Get)
+app.use('/list',GetAll)
+app.use('/updatekey',Update)
+app.use('/removekey', Remove)

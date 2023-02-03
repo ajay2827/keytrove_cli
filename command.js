@@ -6,9 +6,9 @@ const SignIn=require('./controllers/SignIn')
 const SignOut=require('./controllers/SignOut')
 const Set=require('./controllers/Set')
 const Get=require('./controllers/Get')
-// const GetAll=require('./controllers/GetAll')
-// const UpDate=require('./controllers/Update')
-// const Delete=require('./controllers/Delete')
+const GetAll=require('./controllers/GetAll')
+const UpDate=require('./controllers/Update')
+const Delete=require('./controllers/Delete')
 // const UpdateList=require('./controllers/Updatelist')
 // const {connectDB}=require('./db/connect')
 const { question_signin , question_signup , question_keyvalue} = require('./question')
@@ -56,11 +56,11 @@ program
 .description('getting key value data')
 .action(key=>Get(key))
 
-// program
-// .command('list')
-// .alias('l')
-// .description('getting all key-value of user')
-// .action(()=>GetAll());
+program
+.command('list')
+.alias('l')
+.description('getting all key-value of user')
+.action(()=>GetAll());
 
 // program
 // .command('updatelist')
@@ -68,13 +68,13 @@ program
 // .description('give list of updated key-value')
 // .action(()=>UpdateList())
 
-// program
-// .command('update <id>')
-// .alias('u')
-// .description('update a key-value of user')
-// .action(id=>{
-//   prompt(question_keyvalue).then(ans=>UpDate(id,ans))
-// })
+program
+.command('update <id>')
+.alias('u')
+.description('update a key-value of user')
+.action(id=>{
+  prompt(question_keyvalue).then(ans=>UpDate(id,ans))
+})
 
 // program
 // .command('removelist')
@@ -82,11 +82,11 @@ program
 // .description('give list of key-value want to remove')
 // .action(()=>UpdateList())
 
-// program
-// .command('remove <id>')
-// .alias('r')
-// .description('remove key-value of user')
-// .action(id=>Delete(id))
+program
+.command('remove <id>')
+.alias('r')
+.description('remove key-value of user')
+.action(id=>Delete(id))
 
 program.parse(process.argv) ;
 
