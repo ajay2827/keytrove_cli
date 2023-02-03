@@ -1,28 +1,24 @@
-Key = require('../models/Features')
-const authFunction = require('../auth')
-const {client} = require('../db/Redis');
-const UpDate=async(id,data)=>{
-    
+const setpath = 'http://localhost:5055/updatekey'
+const fs = require('fs');
+const axios = require('axios');
+const path = require('path');
+
+const UpDate = async (id, data) => {
+    const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+    const authtoken = fs.readFileSync(filePath, 'utf8')
+    const data1={
+        "key":data.key,
+        "value":data.value,
+        'ttl':data.ttl,
+        "authtoken":authtoken,
+        "id":id
+    }
     try {
-        const email = await authFunction()
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-    
-     
-    if ( data.Expiration_Time == -1 ) {
-                await client.set(`${id}` , `1`) ;
-            }else {
-                await client.setex(`${id}` , data.Expiration_Time , '1' ) ;
-            }
-            await Key.updateOne({_id:id},{$set:{key:data.key,value:data.value}})
-            console.log("key Updated")
-   
-            const fun = () =>{
-                process.exit(0) ;
-            }
-            setTimeout(fun, 1000);
+        await axios.put(setpath,data1).
+        then((res)=>{
+          console.log('Key Updated');
+          process.exit(0);
+        })
 
     } catch (error) {
         console.log(error);
@@ -30,4 +26,4 @@ const UpDate=async(id,data)=>{
 
 }
 
-module.exports=UpDate
+module.exports = UpDate
