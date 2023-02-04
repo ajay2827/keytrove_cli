@@ -28,7 +28,7 @@ const connectDB =  async () =>{
     useUnifiedTopology: true
 }).then(()=>{
     app.listen(port , ()=>{
-        console.log(`app is listning on port ${port}`) ;
+        console.log(`App is listning on port ${port}`) ;
     })
 })
 .catch((err)=>

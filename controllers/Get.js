@@ -7,6 +7,10 @@ const Get = async (key) => {
 
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
     const authtoken = fs.readFileSync(filePath, 'utf8');
+    if(!authtoken){
+        console.log('SignIn to Get Data')
+        return
+    }
     const data={
         "key":key,
         "authtoken":authtoken
@@ -21,7 +25,7 @@ const Get = async (key) => {
              process.exit(0);
           })
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data.msg);
     }
 }
 

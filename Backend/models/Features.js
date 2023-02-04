@@ -5,12 +5,12 @@ const KeysSchema= new mongoose.Schema(
         key:
         {
             type:String,
-            require:true
+            required:[true,'Key is required'],
         },
         value:
         {
             type:String,
-            require:true
+            required:[true,'Value is required'],
         },
         email:{
             type:String,

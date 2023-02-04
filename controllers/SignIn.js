@@ -15,10 +15,10 @@ const SignIn = async (user) =>{
           return;
       });
     })
-    console.log("signined success") ;
+    console.log("Successfully SignIn") ;
   }
   catch (error) {
-    console.log(error);
+    console.log(error.response.data.msg);
   }
 }
 
