@@ -9,8 +9,7 @@ const Get=require('./controllers/Get')
 const GetAll=require('./controllers/GetAll')
 const UpDate=require('./controllers/Update')
 const Delete=require('./controllers/Delete')
-// const UpdateList=require('./controllers/Updatelist')
-// const {connectDB}=require('./db/connect')
+const Help=require('./controllers/Help')
 const { question_signin , question_signup , question_keyvalue} = require('./question')
 
 //  connectDB()
@@ -87,6 +86,13 @@ program
 .alias('r')
 .description('remove key-value of user')
 .action(id=>Delete(id))
+
+program
+.command('help')
+.alias('h')
+.description('Help Command')
+.action(()=>Help());
+
 
 program.parse(process.argv) ;
 
