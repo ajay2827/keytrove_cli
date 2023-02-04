@@ -8,10 +8,6 @@ router.post('/',async(req,res)=>{
     try {
         const {key,value,ttl,authtoken}=req.body;
         const email=await authFunction(authtoken)
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return;
-        }
         const NewData={
             key:key,
             value:value,
@@ -26,7 +22,8 @@ router.post('/',async(req,res)=>{
        console.log("Key Added") ;
        res.status(200).json({message:"key added" , value:0})
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
+    res.status(500).json({ msg: error.message });
     }
 })
 

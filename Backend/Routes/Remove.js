@@ -8,11 +8,13 @@ router.delete('/',async(req,res)=>{
     try{
         const {authtoken,id}=req.body;
         const email=await authFunction(authtoken);
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
+       
         const feature=await Key.find({email:email, _id:id})
+        if (feature.length === 0) {
+            console.info('Enter a valid key ');
+            res.status(400).json({ msg: 'Enter a valid key' })
+            return;
+        }
             const val = await client.get(`${feature._id}`) ;
             if ( val == 1 ) {
                 await client.del(`${feature._id}`) ;
@@ -22,7 +24,8 @@ router.delete('/',async(req,res)=>{
     }
     catch(error)
     {
-        console.log(error)
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
     }
 })
 

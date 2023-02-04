@@ -7,27 +7,34 @@ const authFunction = require('../auth')
 router.post('/',async(req,res)=>{
     try {     
         const {key,authtoken}=req.body;
-        const email=await authFunction(authtoken);
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-        
+        const email=await authFunction(authtoken);        
         const features = await Key.find({ email: email, key: key });
-        if (!features.length === 0) {
-            console.info('Enter a valid key');
+        if (features.length === 0) {
+            console.info('Enter a valid key ');
+            res.status(400).json({ msg: 'Enter a valid key' })
             return;
         }
-        // features.map( async(feature) => {
-        //     const val = await client.get(`${feature._id}`) ;
-        //     if ( val == 1 ) {
-        //         console.log(`${feature.key} -> ${feature.value}`);
-        //     }
-        // })
-        res.status(200).json(features);
+        const newfeature = [] ;
+        features.map( async(feature) => {
+            const val = await client.get(`${feature._id}`) ;          
+            if ( val == 1 ) {
+                newfeature.push(feature);
+            }
+        })
+        if(newfeature.length!==0)
+        {
+            res.status(400).json(newfeature);
+            return;
+        }
+        else
+        {
+            res.status(400).json({msg:"key is not present"});
+            return;
+        }
 
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
     }
 
 })

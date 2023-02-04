@@ -6,6 +6,10 @@ const path = require('path');
 const UpDate = async (id, data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
+    if(!authtoken){
+        console.log('SignIn to Update Data')
+        return
+    }
     const data1={
         "key":data.key,
         "value":data.value,
@@ -14,6 +18,7 @@ const UpDate = async (id, data) => {
         "id":id
     }
     try {
+        
         await axios.put(setpath,data1).
         then((res)=>{
           console.log('Key Updated');
@@ -21,7 +26,7 @@ const UpDate = async (id, data) => {
         })
 
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data.msg);
     }
 
 }

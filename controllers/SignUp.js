@@ -9,7 +9,6 @@ const SignUp = async (user) => {
     await axios.post(signupurl , user).
     then(async (res)=>{
       const token = res.data.authtoken
-     
       const filePath=path.join(__dirname+'/authStorage/authToken.txt')
       fs.writeFile(filePath, token, (err) => {
         if (err)
@@ -19,7 +18,7 @@ const SignUp = async (user) => {
     })
   }
   catch (error) {
-    console.log(error);
+    console.log(error.response.data.msg);
   }
 }
 

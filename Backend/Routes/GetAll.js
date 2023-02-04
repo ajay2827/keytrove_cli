@@ -7,15 +7,17 @@ const authFunction = require('../auth')
 router.post('/',async(req,res)=>{
     try {
         const {authtoken}=req.body;
-        const email=await authFunction(authtoken);
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
+        const email=await authFunction(authtoken)
         const features = await Key.find({ email:email });
+        if (features.length === 0) {
+            console.info('No Data Exist');
+            res.status(400).json({ msg: 'No Data Exist' })
+            return;
+        }
         res.status(200).json(features)
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
     }
 })
 
