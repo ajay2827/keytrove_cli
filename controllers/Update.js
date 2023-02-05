@@ -3,7 +3,7 @@ const fs = require('fs');
 const axios = require('axios');
 const path = require('path');
 
-const UpDate = async (id, data) => {
+const UpDate = async (qkey, data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
@@ -15,7 +15,7 @@ const UpDate = async (id, data) => {
         "value":data.value,
         'ttl':data.ttl,
         "authtoken":authtoken,
-        "id":id
+        "qkey":qkey
     }
     try {
         

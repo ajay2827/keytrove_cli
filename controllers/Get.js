@@ -18,10 +18,8 @@ const Get = async (key) => {
     try {
          await axios.post(getpath,data).
           then((res)=>{
-             const feature=res.data;
-             feature.map((fea)=>{
-                console.log(`${fea.key} -> ${fea.value}`);
-             })
+              console.log(`${res.data.key} --> ${res.data.value}`);
+             
              process.exit(0);
           })
     } catch (error) {

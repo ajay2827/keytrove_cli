@@ -18,7 +18,7 @@ const GetAll=async()=>{
       then((res)=>{
         const features=res.data;
         features.map((fea)=>{
-            console.log(`${fea.key} -> ${fea.value}  _id: ${fea._id}`);
+            console.log(`${fea.key} -> ${fea.value} `);
         })
       })
     process.exit(0);

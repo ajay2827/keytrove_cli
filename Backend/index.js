@@ -8,6 +8,7 @@ const Get=require('./Routes/Get')
 const GetAll=require('./Routes/GetAll')
 const Update=require('./Routes/Update')
 const Remove=require('./Routes/Remove')
+const Removeall=require('./Routes/Removeall')
 require('dotenv').config() ;
 
 const port = 5055 ;
@@ -47,3 +48,4 @@ app.use('/getkey',Get)
 app.use('/list',GetAll)
 app.use('/updatekey',Update)
 app.use('/removekey', Remove)
+app.use('/removeall',Removeall)

@@ -6,20 +6,20 @@ const authFunction = require('../auth');
 
 router.delete('/',async(req,res)=>{
     try{
-        const {authtoken,id}=req.body;
+        const {authtoken,qkey}=req.body;
         const email=await authFunction(authtoken);
        
-        const feature=await Key.find({email:email, _id:id})
+        const feature=await Key.find({email:email, key:qkey})
         if (feature.length === 0) {
             console.info('Enter a valid key ');
             res.status(400).json({ msg: 'Enter a valid key' })
             return;
         }
-            const val = await client.get(`${feature._id}`) ;
+            const val = await client.get(`${feature.key}`) ;
             if ( val == 1 ) {
-                await client.del(`${feature._id}`) ;
+                await client.del(`${feature.key}`) ;
             }
-            await Key.deleteOne({email:email ,_id:id});
+            await Key.deleteOne({email:email ,key:qkey});
             res.status(200).json({message:"key remove"})
     }
     catch(error)
@@ -30,3 +30,4 @@ router.delete('/',async(req,res)=>{
 })
 
 module.exports=router;
+

@@ -16,6 +16,7 @@ const SignUp = async (user) => {
           return;
       });
     })
+    console.log("Successfully SignUp") ;
   }
   catch (error) {
     console.log(error.response.data.msg);
