@@ -14,23 +14,45 @@ router.post('/',async(req,res)=>{
             res.status(400).json({ msg: 'Enter a valid key' })
             return;
         }
-        const newfeature = [] ;
-        features.map( async(feature) => {
-            const val = await client.get(`${feature._id}`) ;          
-            if ( val == 1 ) {
-                newfeature.push(feature);
-            }
-        })
-        if(newfeature.length!==0)
+        const val = await client.get(`${features[0].key}`);
+        if(val==1)
         {
-            res.status(400).json(newfeature);
-            return;
+            res.status(200).json(features[0]);
         }
-        else
+        else 
         {
+            await Key.deleteOne({email:email ,_id:`${features[0]._id}`});
             res.status(400).json({msg:"key is not present"});
-            return;
         }
+
+
+        // const newfeature = [] ;
+           
+        //     features.map( async(feature) => {
+        //     const val = await client.get(`${feature._id}`) ;          
+        //     if ( val == 1 ) {
+        //         console.log(feature);
+        //         newfeature.push(feature);
+        //     }
+        // })
+       
+        // const fun=async()=>{
+        //     const email=await authFunction(authtoken);
+        //     console.log(email);
+        //     if(newfeature.length!==0)
+        //     {
+        //         res.status(400).json(newfeature);
+        //         return;
+        //     }
+        //     else
+        //     {
+        //         res.status(400).json({msg:"key is not present"});
+        //         return;
+        //     }
+        // }
+        // fun();
+
+
 
     } catch (error) {
         console.log(error.message);

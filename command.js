@@ -10,6 +10,7 @@ const GetAll=require('./controllers/GetAll')
 const UpDate=require('./controllers/Update')
 const Delete=require('./controllers/Delete')
 const Help=require('./controllers/Help')
+const DeleteAll=require('./controllers/DeleteAll')
 const { question_signin , question_signup , question_keyvalue} = require('./question')
 
 //  connectDB()
@@ -68,11 +69,11 @@ program
 // .action(()=>UpdateList())
 
 program
-.command('update <id>')
+.command('update <qkey>')
 .alias('u')
 .description('update a key-value of user')
-.action(id=>{
-  prompt(question_keyvalue).then(ans=>UpDate(id,ans))
+.action(qkey=>{
+  prompt(question_keyvalue).then(ans=>UpDate(qkey,ans))
 })
 
 // program
@@ -82,10 +83,16 @@ program
 // .action(()=>UpdateList())
 
 program
-.command('remove <id>')
+.command('remove <qkey>')
 .alias('r')
 .description('remove key-value of user')
-.action(id=>Delete(id))
+.action(qkey=>Delete(qkey))
+
+program
+.command('removeall')
+.alias('rl')
+.description('remove all key-value of user')
+.action(()=>DeleteAll())
 
 program
 .command('help')

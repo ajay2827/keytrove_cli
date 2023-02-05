@@ -13,11 +13,17 @@ router.post('/',async(req,res)=>{
             value:value,
             email:email
         }
+        const data=await Key.find({ email: email, key: key });
+        if(data.length!==0)
+        {
+          res.status(400).json({msg:"key is unique"});
+          return;
+        }
         const keydata = await Key.create(NewData);
         if ( ttl == -1 ) {
-            client.set(`${keydata._id}` , `1`) ;
+            client.set(`${keydata.key}` , `1`) ;
         }else {
-            client.setex(`${keydata._id}` , ttl , '1' ) ;
+            client.setex(`${keydata.key}` , ttl , '1' ) ;
         }
        console.log("Key Added") ;
        res.status(200).json({message:"key added" , value:0})
