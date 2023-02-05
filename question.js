@@ -10,9 +10,10 @@ const question_signup = [
         message:'Enter Email id --> '
     },
     {
-        type:'input',
-        name:'password',
-        message:'Enter password --> '
+        type: 'password',
+		mask: '*',			
+		message: 'Enter a password-->',
+		name: 'password'
     }
 ] ;
 
@@ -23,9 +24,10 @@ const question_signin = [
         message:'Enter Email id --> '
     },
     {
-        type:'input',
-        name:'password',
-        message:'Enter password --> '
+        type: 'password',
+		mask: '*',			
+		message: 'Enter a password-->',
+		name: 'password'
     }
 ] ;
 
