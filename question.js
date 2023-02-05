@@ -46,5 +46,17 @@ const question_keyvalue = [
         default:-1 
     }
 ] ;
+const question_image = [
+    {
+        type:'input',
+        name:'name',
+        message:'Enter Image name --> '
+    } ,
+    {
+        type: 'input',
+        name:'path',
+        message:'Enter Image Path --> '
+    }
+] ;
 
-module.exports = {question_signin , question_signup , question_keyvalue} ;
+module.exports = {question_signin , question_signup , question_keyvalue,question_image} ;
