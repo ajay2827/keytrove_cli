@@ -11,7 +11,8 @@ const UpDate=require('./controllers/Update')
 const Delete=require('./controllers/Delete')
 const Help=require('./controllers/Help')
 const DeleteAll=require('./controllers/DeleteAll')
-const { question_signin , question_signup , question_keyvalue} = require('./question')
+const ImageUpload=require('./controllers/ImageUpload')
+const { question_signin , question_signup , question_keyvalue,question_image} = require('./question')
 
 //  connectDB()
 
@@ -100,6 +101,13 @@ program
 .description('Help Command')
 .action(()=>Help());
 
+program
+.command('imgUpload')
+.alias('k')
+.description('Img Uploading')
+.action(()=>{
+  prompt(question_image).then(ans=> ImageUpload(ans)) ;
+}) ;
 
 program.parse(process.argv) ;
 
