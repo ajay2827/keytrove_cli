@@ -1,29 +1,30 @@
-const Key = require('../models/Features')
-const authFunction = require('../auth')
-const {client , Redis} = require('../db/Redis') ;
-const { disconnectDB } = require('../db/connect')
+const listpath='http://localhost:5055/list'
+const fs = require('fs');
+const axios = require( 'axios' );
+const path=require('path')
+
 const GetAll=async()=>{
-    try {
-        const email = await authFunction()
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-        const features = await Key.find({ email:email });
-         features.map(async (feature) => {
-            const val = await client.get(`${feature._id}`) ;
-            if ( val == 1 ) {
-                console.log(`${feature.key} -> ${feature.value}`);
-            }
-        })   
-        const fun = () =>{
-            process.exit(0) ;
-        }
-        setTimeout(fun, 1000);
-    } catch (error) {
-        console.log(error);
+    const filePath=path.join(__dirname+'/authStorage/authToken.txt');
+    const authtoken = fs.readFileSync(filePath, 'utf8');
+    if(!authtoken){
+      console.log('SignIn to Get Data')
+      return
+  }
+    const data={
+        "authtoken":authtoken
     }
-    // disconnectDB() ;
-    // process.exit(0);
+    try {
+      await axios.post(listpath,data).
+      then((res)=>{
+        const features=res.data;
+        features.map((fea)=>{
+            console.log(`${fea.key} -> ${fea.value} `);
+        })
+      })
+    process.exit(0);
+    } catch (error) {
+        console.log(error.response.data.msg);
+    }
+
 }
 module.exports=GetAll

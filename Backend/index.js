@@ -3,6 +3,13 @@ const express = require('express') ;
 const app = express() ;
 const Signup = require('./Routes/Signup')
 const Signin = require('./Routes/Signin')
+const Set=require('./Routes/Set')
+const Get=require('./Routes/Get')
+const GetAll=require('./Routes/GetAll')
+const Update=require('./Routes/Update')
+const Remove=require('./Routes/Remove')
+const Removeall=require('./Routes/Removeall')
+const ImageUpload=require('./Routes/ImageUpload')
 require('dotenv').config() ;
 
 const port = 5055 ;
@@ -16,6 +23,7 @@ const mongoose = require('mongoose') ;
 mongoose.Promise = global.Promise ;
 mongoose.set('strictQuery', false);
 
+const fileUpload=require('express-fileupload')
 // const db = mongoose.createConnection()
 const connectDB =  async () =>{
   await mongoose.connect(process.env.MONGO_URL,{
@@ -23,7 +31,7 @@ const connectDB =  async () =>{
     useUnifiedTopology: true
 }).then(()=>{
     app.listen(port , ()=>{
-        console.log(`app is listning on port ${port}`) ;
+        console.log(`App is listning on port ${port}`) ;
     })
 })
 .catch((err)=>
@@ -37,3 +45,14 @@ app.get('/' , (req,res)=>{
 })
 app.use('/signup' , Signup)
 app.use('/signin' , Signin)
+app.use('/setkey',Set)
+app.use('/getkey',Get)
+app.use('/list',GetAll)
+app.use('/updatekey',Update)
+app.use('/removekey', Remove)
+app.use('/removeall',Removeall)
+app.use('/removekey', Remove)
+app.use('/imgUpload', ImageUpload)
+app.use(fileUpload({
+    useTempFiles:true
+}))

@@ -1,31 +1,29 @@
-const Key = require('../models/Features')
-const authFunction = require('../auth')
-const {client , Redis} = require('../db/Redis') ;
+const getpath='http://localhost:5055/getkey'
+const fs = require('fs');
+const axios = require( 'axios' );
+const path=require('path')
+
 const Get = async (key) => {
+
+    const filePath=path.join(__dirname+'/authStorage/authToken.txt');
+    const authtoken = fs.readFileSync(filePath, 'utf8');
+    if(!authtoken){
+        console.log('SignIn to Get Data')
+        return
+    }
+    const data={
+        "key":key,
+        "authtoken":authtoken
+    }    
     try {
-        const email = await authFunction()
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-        const features = await Key.find({ email: email, key: key });
-        if (!features.length === 0) {
-            console.info('Enter a valid key');
-            return;
-        }
-        features.map( async(feature) => {
-            const val = await client.get(`${feature._id}`) ;
-            if ( val == 1 ) {
-                console.log(`${feature.key} -> ${feature.value}`);
-            }
-        })
-    
-        const fun = () =>{
-            process.exit(0) ;
-        }
-        setTimeout(fun, 1000);
+         await axios.post(getpath,data).
+          then((res)=>{
+              console.log(`${res.data.key} --> ${res.data.value}`);
+             
+             process.exit(0);
+          })
     } catch (error) {
-        console.log(error);
+        console.log(error.response.data.msg);
     }
 }
 

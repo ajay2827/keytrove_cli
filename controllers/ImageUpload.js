@@ -1,10 +1,9 @@
-const setpath='http://localhost:5055/setkey'
-const fs = require('fs');
+const imgPath='http://localhost:5055/imgUpload'
 const axios = require( 'axios' );
-const path=require('path');
 const { log } = require('console');
-
-const Set = async (data) => {
+const path=require('path')
+const fs=require('fs')
+const ImageUpload = async (data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
@@ -12,15 +11,14 @@ const Set = async (data) => {
         return
     }
     const data1 = {
-        "key":data.key,
-        "value":data.value,
-        'ttl':data.ttl,
+        "img_name":data.name,
+        "img_path":data.path,
         "authtoken":authtoken
     }
     try {
-       await axios.post(setpath,data1).
+       await axios.post(imgPath,data1).
        then((res)=>{
-        console.log("key added");
+        console.log("Image Added");
         process.exit(0);
        })
     
@@ -32,4 +30,4 @@ const Set = async (data) => {
 
 }
 
-module.exports = Set
+module.exports = ImageUpload

@@ -10,9 +10,10 @@ const question_signup = [
         message:'Enter Email id --> '
     },
     {
-        type:'input',
-        name:'password',
-        message:'Enter password --> '
+        type: 'password',
+		mask: '*',			
+		message: 'Enter a password-->',
+		name: 'password'
     }
 ] ;
 
@@ -23,9 +24,10 @@ const question_signin = [
         message:'Enter Email id --> '
     },
     {
-        type:'input',
-        name:'password',
-        message:'Enter password --> '
+        type: 'password',
+		mask: '*',			
+		message: 'Enter a password-->',
+		name: 'password'
     }
 ] ;
 
@@ -40,9 +42,21 @@ const question_keyvalue = [
     },
     {
         type:'input',
-        name:'Expiration_Time',
+        name:'ttl',
         default:-1 
     }
 ] ;
+const question_image = [
+    {
+        type:'input',
+        name:'name',
+        message:'Enter Image name --> '
+    } ,
+    {
+        type: 'input',
+        name:'path',
+        message:'Enter Image Path --> '
+    }
+] ;
 
-module.exports = {question_signin , question_signup , question_keyvalue} ;
+module.exports = {question_signin , question_signup , question_keyvalue,question_image} ;

@@ -1,25 +1,24 @@
-const signinurl = 'http://localhost:5055/signin/signin'
+const signinurl = 'http://localhost:5055/signin'
 const fs = require('fs');
 const axios = require( 'axios' );
-
+const path=require('path')
 
 const SignIn = async (user) =>{
   try {
     await axios.post(signinurl , user).
     then(async (res)=>{
-      const data =   res ;
-      const token = data.data.authtoken
-      // console.log(token) ;
-      fs.writeFile("authToken.txt", token, (err) => {
+      const token = res.data.authtoken
+      const filePath=path.join(__dirname+'/authStorage/authToken.txt')
+      fs.writeFile(filePath, token, (err) => {
         if (err)
           console.log('SignIn Again');
           return;
       });
     })
-    console.log("signined success") ;
+    console.log("Successfully SignIn") ;
   }
   catch (error) {
-    console.log(error);
+    console.log(error.response.data.msg);
   }
 }
 

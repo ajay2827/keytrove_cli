@@ -1,33 +1,33 @@
-const Key = require('../models/Features')
-const authFunction = require('../auth');
-const {client} = require('../db/Redis')
+const removepath = 'http://localhost:5055/removekey'
+const fs = require('fs');
+const axios = require('axios');
+const path = require('path');
 
-const Delete=async(id)=>{
+const Delete = async (qkey) => {
+    const filePath = path.join(__dirname + '/authStorage/authToken.txt')
+    const authtoken = fs.readFileSync(filePath, 'utf8')
+    if(!authtoken){
+        console.log('SignIn to Remove Data')
+        return
+    }
     try {
-        const email = await authFunction()
-        if (!email) {
-            console.log('SignIn to use this functionality');
-            return
-        }
-        const feature=await Key.find({email:email, _id:id})
-            const val = await client.get(`${feature._id}`) ;
-            if ( val == 1 ) {
-                await client.del(`${feature._id}`) ;
-            }
-            await Key.deleteOne({email:email ,_id:id}) ;
-        
-        console.log(`Key ${feature[0].key} deleted`) ;
-        const fun = () =>{
-            process.exit(0) ;
-        }
-        setTimeout(fun, 1000);
+        await axios.delete(removepath,{
+            data:{"authtoken":authtoken,"qkey": qkey}
+        }).
+            then((res) => {
+                console.log("key delete");
+                const fun = () => {
+                    process.exit(0);
+                }
+                setTimeout(fun, 1000);
+            })
     } catch (error) {
-        console.log(error);
-        const fun = () =>{
-            process.exit(0) ;
+        console.log(error.response.data.msg);
+        const fun = () => {
+            process.exit(0);
         }
         setTimeout(fun, 1000);
     }
 }
 
-module.exports=Delete
+module.exports = Delete
