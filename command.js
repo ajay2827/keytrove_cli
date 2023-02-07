@@ -119,7 +119,7 @@ program
 .action(key=>ImageGet(key))
 
 program
-.command('imageGetAll')
+.command('listimagename')
 .alias('l')
 .description('Getting all Image keys')
 .action(()=>ImageGetAll());

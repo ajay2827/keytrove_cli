@@ -1,28 +1,21 @@
 const fs = require('fs');
 const path=require('path')
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const SignOut=async ()=>{
     try {
         const filePath=path.join(__dirname+'/authStorage/authToken.txt')
-        // await fs.unlink(filePath, function (err) {
-        //     if (err) 
-        //     console.log(err);
-        
-        //     console.log('Successfully SignOut!!');
-        //     const fun = () =>{
-        //         process.exit(0) ;
-        //     }
-        //     setTimeout(fun, 1000);
-        // });
         fs.writeFile(filePath, '', (err) => {
             if (err){
-              console.log('SignIn Again');
+              log(chalk.red.bold("First Signin To Signout"));
               return;
             }
-              console.log('Successfully SignOut!!');
+              log(chalk.green.bold("Successfully SignOut!!"))
           });
     } catch (error) {
-        console.log(error);
+        log(chalk.red.bold(error.response.data.msg));
+
         const fun = () =>{
             process.exit(0) ;
         }

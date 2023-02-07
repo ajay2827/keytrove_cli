@@ -2,13 +2,14 @@ const setpath='http://localhost:5055/setkey'
 const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path');
-const { log } = require('console');
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const Set = async (data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
-        console.log('SignIn to Set Data')
+        log(chalk.red.bold('First SignIn'))
         return
     }
     const data1 = {
@@ -20,13 +21,13 @@ const Set = async (data) => {
     try {
        await axios.post(setpath,data1).
        then((res)=>{
-        console.log("key added");
+        log(chalk.green.bold("key added"));
         process.exit(0);
        })
     
     }
     catch (error) {
-        console.log(error.response.data.msg);
+        log(chalk.cyan.bold(error.response.data.msg));
         process.exit(0);
     }
 

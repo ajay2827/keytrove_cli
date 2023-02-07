@@ -2,12 +2,14 @@ const removepath = 'http://localhost:5055/removekey'
 const fs = require('fs');
 const axios = require('axios');
 const path = require('path');
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const Delete = async (qkey) => {
     const filePath = path.join(__dirname + '/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
-        console.log('SignIn to Remove Data')
+        log(chalk.red.bold('First SignIn'))
         return
     }
     try {
@@ -15,14 +17,14 @@ const Delete = async (qkey) => {
             data:{"authtoken":authtoken,"qkey": qkey}
         }).
             then((res) => {
-                console.log("key delete");
+                log(chalk.blue("key deleted"));
                 const fun = () => {
                     process.exit(0);
                 }
                 setTimeout(fun, 1000);
             })
     } catch (error) {
-        console.log(error.response.data.msg);
+        log(chalk.red.bold(error.response.data.msg));
         const fun = () => {
             process.exit(0);
         }

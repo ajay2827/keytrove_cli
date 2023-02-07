@@ -2,12 +2,14 @@ const listpath='http://localhost:5055/imageGetAll'
 const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path')
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const ImageGetAll=async()=>{
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
     const authtoken = fs.readFileSync(filePath, 'utf8');
     if(!authtoken){
-      console.log('SignIn to Get Data')
+      log(chalk.red.bold('First SignIn  !! '))
       return
   }
     const data={
@@ -17,13 +19,14 @@ const ImageGetAll=async()=>{
       await axios.post(listpath,data).
       then((res)=>{
         const images=res.data;
+        log(chalk.green("Images Name --> "));
         images.map((img)=>{
-            console.log(`${img.img_name}`);
+            log(chalk.cyan(img.img_name)) ;
         })
       })
     process.exit(0);
     } catch (error) {
-        console.log(error.response.data.msg);
+      log(chalk.yellow(error.response.data.msg));
     }
 
 }
