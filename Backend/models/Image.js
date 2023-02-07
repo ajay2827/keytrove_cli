@@ -1,4 +1,6 @@
 const mongoose=require('mongoose')
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotallySecretKey');
 
 const ImageSchema=new mongoose.Schema(
     {
@@ -23,5 +25,9 @@ const ImageSchema=new mongoose.Schema(
           }
 }
 )
+
+// ImageSchema.pre('save',()=>{
+//     this.img_path=cryptr.encrypt(this.img_path)
+// })
 
 module.exports=mongoose.model("Image",ImageSchema)
