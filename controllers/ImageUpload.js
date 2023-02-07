@@ -24,7 +24,7 @@ const ImageUpload = async (data) => {
     
     }
     catch (error) {
-        console.log(error.response.data.msg);
+        console.log(error);
         process.exit(0);
     }
 
