@@ -10,6 +10,9 @@ const Update=require('./Routes/Update')
 const Remove=require('./Routes/Remove')
 const Removeall=require('./Routes/Removeall')
 const ImageUpload=require('./Routes/ImageUpload')
+const ImageGet=require('./Routes/ImageGet')
+const ImageGetAll=require('./Routes/ImageGetAll')
+const ImageDelete=require('./Routes/ImageDelete')
 require('dotenv').config() ;
 
 const port = 5055 ;
@@ -53,6 +56,9 @@ app.use('/removekey', Remove)
 app.use('/removeall',Removeall)
 app.use('/removekey', Remove)
 app.use('/imgUpload', ImageUpload)
+app.use('/imageGet', ImageGet)
+app.use('/imageGetAll', ImageGetAll)
+app.use('/imageDelete', ImageDelete)
 app.use(fileUpload({
     useTempFiles:true
 }))
