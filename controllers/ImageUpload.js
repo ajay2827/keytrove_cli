@@ -1,13 +1,16 @@
 const imgPath='http://localhost:5055/imgUpload'
 const axios = require( 'axios' );
-const { log } = require('console');
+// const { log } = require('console');
 const path=require('path')
 const fs=require('fs')
+const chalk = require('chalk') ;
+const log = console.log ;
+
 const ImageUpload = async (data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
-        console.log('SignIn to Set Data')
+        log(chalk.red.bold('First SignIn  !! '))
         return
     }
     const data1 = {
@@ -18,13 +21,13 @@ const ImageUpload = async (data) => {
     try {
        await axios.post(imgPath,data1).
        then((res)=>{
-        console.log("Image Added");
+        log(chalk.green("Image Added ")) ;
         process.exit(0);
        })
     
     }
     catch (error) {
-        console.log(error);
+        log(chalk.yellow(error.response.data.msg));
         process.exit(0);
     }
 

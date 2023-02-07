@@ -2,13 +2,14 @@ const getpath='http://localhost:5055/getkey'
 const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path')
-
+const chalk = require('chalk') ;
+const log = console.log ;
 const Get = async (key) => {
 
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
     const authtoken = fs.readFileSync(filePath, 'utf8');
     if(!authtoken){
-        console.log('SignIn to Get Data')
+        log(chalk.red.bold('First SignIn  !! '))
         return
     }
     const data={
@@ -18,12 +19,12 @@ const Get = async (key) => {
     try {
          await axios.post(getpath,data).
           then((res)=>{
-              console.log(`${res.data.key} --> ${res.data.value}`);
+              log(chalk.green.bold(res.data.key) + ' --> ' + chalk.yellow(res.data.value));
              
              process.exit(0);
           })
     } catch (error) {
-        console.log(error.response.data.msg);
+        log(chalk.yellow(error.response.data.msg));
     }
 }
 
