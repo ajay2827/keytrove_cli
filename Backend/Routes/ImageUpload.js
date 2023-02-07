@@ -29,6 +29,7 @@ router.post('/',async (req,res)=>{
         return;
     }
     const imageData={
+        email:email,
         img_name:img_name,
         img_path:result.url
     }
