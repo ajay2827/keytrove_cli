@@ -12,6 +12,9 @@ const Delete=require('./controllers/Delete')
 const Help=require('./controllers/Help')
 const DeleteAll=require('./controllers/DeleteAll')
 const ImageUpload=require('./controllers/ImageUpload')
+const ImageGet=require('./controllers/ImageGet')
+const ImageGetAll=require('./controllers/ImageGetAll')
+const ImageDelete=require('./controllers/ImageDelete')
 const { question_signin , question_signup , question_keyvalue,question_image} = require('./question')
 
 //  connectDB()
@@ -108,6 +111,24 @@ program
 .action(()=>{
   prompt(question_image).then(ans=> ImageUpload(ans)) ;
 }) ;
+
+program
+.command('imageGet <key>')
+.alias('g')
+.description('getting Image URL')
+.action(key=>ImageGet(key))
+
+program
+.command('imageGetAll')
+.alias('l')
+.description('Getting all Image keys')
+.action(()=>ImageGetAll());
+
+program
+.command('imageDelete <qkey>')
+.alias('r')
+.description('Image Delete')
+.action(qkey=>ImageDelete(qkey))
 
 program.parse(process.argv) ;
 
