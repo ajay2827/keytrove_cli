@@ -1,0 +1,17 @@
+{
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.33.0",
+        "commander": "^10.0.0",
+        "cryptr": "^6.1.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-fileupload": "^1.4.0",
+        "express-validator": "^6.14.3",
+        "inquirer": "^8.0.0",
+        "ioredis": "^5.2.6",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.8.4"
+    }
+}
