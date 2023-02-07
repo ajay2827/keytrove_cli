@@ -3,6 +3,8 @@ const {client , Redis} = require('../db/Redis');
 const Image = require('../models/Image');
 const router = express.Router();
 const authFunction = require('../auth')
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotallySecretKey');
 
 router.post('/',async(req,res)=>{
     try {     
@@ -16,7 +18,8 @@ router.post('/',async(req,res)=>{
             return;
         }
         const URL=images[0].img_path
-        res.status(200).json({'key':key,'URL':URL})
+        const decryptedURL=cryptr.decrypt(URL)
+        res.status(200).json({'key':key,'URL':decryptedURL})
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ msg: error.message });
