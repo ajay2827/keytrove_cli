@@ -4,6 +4,8 @@ const router = express.Router();
 const authFunction = require('../auth')                           
 const cloudinary=require('cloudinary').v2
 require('dotenv').config()
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotallySecretKey');
 
 cloudinary.config({
     cloud_name:process.env.CLOUD_NAME,
@@ -28,10 +30,11 @@ router.post('/',async (req,res)=>{
         res.status(400).json({ msg: 'An error occured while uploading file' })
         return;
     }
+        const HashedURL=cryptr.encrypt(result.url)
     const imageData={
         email:email,
         img_name:img_name,
-        img_path:result.url
+        img_path:HashedURL
     }
     const imgdata = await Image.create(imageData);
     if(imgdata)
