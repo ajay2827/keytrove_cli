@@ -15,9 +15,9 @@ router.delete('/',async(req,res)=>{
             res.status(400).json({ msg: 'Enter a valid key' })
             return;
         }
-            const val = await client.get(`${feature.key}`) ;
+            const val = await client.get(`${feature._id}`) ;
             if ( val == 1 ) {
-                await client.del(`${feature.key}`) ;
+                await client.del(`${feature._id}`) ;
             }
             await Key.deleteOne({email:email ,key:qkey});
             res.status(200).json({message:"key remove"})

@@ -21,9 +21,9 @@ router.post('/',async(req,res)=>{
         }
         const keydata = await Key.create(NewData);
         if ( ttl == -1 ) {
-            client.set(`${keydata.key}` , `1`) ;
+            client.set(`${keydata._id}` , `1`) ;
         }else {
-            client.setex(`${keydata.key}` , ttl , '1' ) ;
+            client.setex(`${keydata._id}` , ttl , '1' ) ;
         }
        console.log("Key Added") ;
        res.status(200).json({message:"key added" , value:0})

@@ -5,6 +5,8 @@ const path=require('path')
 const chalk = require('chalk') ;
 const { response } = require('express');
 const log = console.log ;
+const Downloader = require("nodejs-file-downloader");
+const homeDir = require('os').homedir();
 
 const ImageGet = async (key) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
@@ -20,9 +22,21 @@ const ImageGet = async (key) => {
     try {
          await axios.post(getpath,data).
           then((res)=>{
-              log( chalk.hex('#f2ba49')(res.data.key) + chalk.hex('#FF69B4')("  URL --> ")+ `${res.data.URL}`);
+            (async () => {
+                const DirPath=`${homeDir}/Desktop/KeyStoreImages`;
+                const downloader = new Downloader({
+                  url: res.data.URL, 
+                  directory: DirPath,
+                  filename:`${res.data.key}.png`
+                });
+                try {
+                   await downloader.download(); 
+                } catch (error) {
+                  console.log("Download failed", error);
+                }
+              })();
+              log(chalk.hex('#FF69B4')('Image ')+chalk.hex('#f2ba49')(res.data.key) + chalk.hex('#FF69B4')(" Downloaded "));
             //  log(res)
-             process.exit(0);
           })
     } catch (error) {
         console.log(error)
