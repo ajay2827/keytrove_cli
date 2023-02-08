@@ -2,6 +2,8 @@ const axios = require( 'axios' );
 const signupurl = 'http://localhost:5055/signup'
 const fs = require('fs');
 const path=require('path')
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const SignUp = async (user) => {
 
@@ -12,14 +14,15 @@ const SignUp = async (user) => {
       const filePath=path.join(__dirname+'/authStorage/authToken.txt')
       fs.writeFile(filePath, token, (err) => {
         if (err)
-          console.log('SignUp Again');
+        log(chalk.red.bold('SignUp Again'))
           return;
       });
     })
-    console.log("Successfully SignUp") ;
+    log(chalk.bgGreen.bold("Successfully Signup"));
+
   }
   catch (error) {
-    console.log(error.response.data.msg);
+    log(chalk.red.bold(error.response.data.msg));
   }
 }
 

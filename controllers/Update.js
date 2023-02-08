@@ -2,12 +2,14 @@ const setpath = 'http://localhost:5055/updatekey'
 const fs = require('fs');
 const axios = require('axios');
 const path = require('path');
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const UpDate = async (qkey, data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
-        console.log('SignIn to Update Data')
+        log(chalk.bgYellow.bold('First SignIn To update Data'))
         return
     }
     const data1={
@@ -21,12 +23,12 @@ const UpDate = async (qkey, data) => {
         
         await axios.put(setpath,data1).
         then((res)=>{
-          console.log('Key Updated');
-          process.exit(0);
+            log(chalk.bgGreen.bold("Data Updated"));
+            process.exit(0);
         })
 
     } catch (error) {
-        console.log(error.response.data.msg);
+        log(chalk.bgRed.bold(error.response.data.msg));
     }
 
 }

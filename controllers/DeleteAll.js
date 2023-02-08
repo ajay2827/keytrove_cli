@@ -2,12 +2,14 @@ const removeallpath='http://localhost:5055/removeall'
 const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path')
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const DeleteAll=async()=>{
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
     const authtoken = fs.readFileSync(filePath, 'utf8');
     if(!authtoken){
-        console.log('SignIn to Get Data')
+        log(chalk.bgYellow.bold('First SignIn To Delete Data'))
         return
     }
     const data={
@@ -18,11 +20,11 @@ const DeleteAll=async()=>{
        await axios.delete(removeallpath,{
         data:{"authtoken":authtoken}
        }).then((res)=>{
-        console.log('all key deleted')
+        log(chalk.green("All Key Deleted"))
         process.exit(0);
        })
     }catch(error){
-        console.log(error.response.data.msg)
+        log(chalk.bgRed.bold(error.response.data.msg));
         process.exit(0);
     }
 }

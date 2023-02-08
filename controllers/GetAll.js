@@ -2,12 +2,14 @@ const listpath='http://localhost:5055/list'
 const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path')
+const chalk = require('chalk') ;
+const log = console.log ;
 
 const GetAll=async()=>{
     const filePath=path.join(__dirname+'/authStorage/authToken.txt');
     const authtoken = fs.readFileSync(filePath, 'utf8');
     if(!authtoken){
-      console.log('SignIn to Get Data')
+      log(chalk.bgYellowBright.bold('First SignIn  !!'))
       return
   }
     const data={
@@ -18,12 +20,12 @@ const GetAll=async()=>{
       then((res)=>{
         const features=res.data;
         features.map((fea)=>{
-            console.log(`${fea.key} -> ${fea.value} `);
+          log(chalk.green.bold(fea.key) + ' --> ' + chalk.yellow(fea.value));
         })
       })
     process.exit(0);
     } catch (error) {
-        console.log(error.response.data.msg);
+      log(chalk.cyan.bold(error.response.data.msg));
     }
 
 }
