@@ -15,11 +15,11 @@ router.put('/',async(req,res)=>{
             return;
         }
         if ( ttl == -1 ) {
-            await client.set(`${features._id}` , `1`) ;
+            await client.set(`${features[0]._id}` , `1`) ;
         }else {
-            await client.setex(`${features._id}` , ttl , '1' ) ;
+            await client.setex(`${features[0]._id}` , ttl , '1' ) ;
         }
-        await Key.updateOne({key:qkey},{$set:{key:key,value:value}})   
+        await Key.updateOne({_id:features[0]._id},{$set:{key:key,value:value}})   
         console.log("key Updated")
         res.status(200).json({message:"key updated"})
     }catch(error)

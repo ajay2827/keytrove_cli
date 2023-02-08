@@ -20,6 +20,7 @@ router.post('/',async(req,res)=>{
           return;
         }
         const keydata = await Key.create(NewData);
+        // console.log(keydata);
         if ( ttl == -1 ) {
             client.set(`${keydata._id}` , `1`) ;
         }else {

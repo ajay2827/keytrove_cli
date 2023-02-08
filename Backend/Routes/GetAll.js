@@ -4,6 +4,18 @@ const Key = require('../models/Features');
 const router = express.Router();
 const authFunction = require('../auth')
 
+
+async function responseToSend(features) {
+    let newarr = [] ;
+    for ( let i = 0 ; i <features.length ; i++) {
+        console.log(features[i]) ;
+        let val = await client.get(features[i]._id) ;
+        if ( val == 1) {
+           newarr.push(features[i]) ;
+        }
+    }
+    return newarr ;
+}
 router.post('/',async(req,res)=>{
     try {
         const {authtoken}=req.body;
@@ -14,7 +26,8 @@ router.post('/',async(req,res)=>{
             res.status(400).json({ msg: 'No Data Exist' })
             return;
         }
-        res.status(200).json(features)
+        const newarr = await responseToSend(features) ;
+        res.status(200).json(newarr)
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ msg: error.message });

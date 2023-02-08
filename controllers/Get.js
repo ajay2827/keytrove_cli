@@ -24,6 +24,7 @@ const Get = async (key) => {
              process.exit(0);
           })
     } catch (error) {
+        // log(error.response)
         log(chalk.yellow(error.response.data.msg));
     }
 }
