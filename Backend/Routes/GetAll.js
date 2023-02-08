@@ -8,7 +8,7 @@ const authFunction = require('../auth')
 async function responseToSend(features) {
     let newarr = [] ;
     for ( let i = 0 ; i <features.length ; i++) {
-        console.log(features[i]) ;
+        // console.log(features[i]) ;
         let val = await client.get(features[i]._id) ;
         if ( val == 1) {
            newarr.push(features[i]) ;
