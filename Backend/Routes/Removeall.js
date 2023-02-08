@@ -9,13 +9,15 @@ router.delete('/',async(req,res)=>{
     {
         const {authtoken,qkey}=req.body;
         const email=await authFunction(authtoken);
-        const feature=await Key.find({email:email})
-        if (feature.length === 0) {
+        const features=await Key.find({email:email})
+        if (features.length === 0) {
             console.info('No Data');
             res.status(400).json({ msg: 'No Data' })         
     }
     // redis wala delete
-   
+    features.map(async(feature)=>{
+        await client.del(`${feature._id}`); 
+    })
     // delete all mongo data
     await Key.deleteMany({email:email}) 
     res.status(200).json({message:"all key remove"})

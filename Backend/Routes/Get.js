@@ -14,7 +14,7 @@ router.post('/',async(req,res)=>{
             res.status(400).json({ msg: 'Enter a valid key' })
             return;
         }
-        const val = await client.get(`${features[0].key}`);
+        const val = await client.get(`${features[0]._id}`);
         if(val==1)
         {
             res.status(200).json(features[0]);

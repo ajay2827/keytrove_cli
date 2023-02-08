@@ -22,9 +22,9 @@ router.post('/',async (req,res)=>{
         return;
         }
     // const filePath='C:/Users/abhin/Desktop/123.png'
-  cloudinary.uploader.upload(img_path,async (err,result)=>{
+  cloudinary.uploader.upload(img_path,resource_type=>raw,async (err,result)=>{
     if(err){
-        console.info('An error occured while uplopading file');
+        console.info(err);
         res.status(400).json({ msg: 'An error occured while uploading file' })
         return;
     }
@@ -40,7 +40,7 @@ router.post('/',async (req,res)=>{
         res.status(200).json({msg:"Image added"});
         return;
     }
-  })
+  },)
     }
 catch(error)
 {

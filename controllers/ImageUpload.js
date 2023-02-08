@@ -5,7 +5,8 @@ const path=require('path')
 const fs=require('fs')
 const chalk = require('chalk') ;
 const log = console.log ;
-
+// const imageToBase64 = require('image-to-base64')
+ 
 const ImageUpload = async (data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
@@ -13,6 +14,13 @@ const ImageUpload = async (data) => {
         log(chalk.red.bold('First SignIn  !! '))
         return
     }
+    // const image = await imageToBase64(data.path);
+    // const ImagePath=path.join(__dirname+'/encryptedImage/EncryptImage.txt')
+    //   fs.writeFile(ImagePath,image, (err) => {
+        // if (err)
+        //   console.log('Error while encryptiing Image');
+    //       return;
+    //   });
     const data1 = {
         "img_name":data.name,
         "img_path":data.path,
