@@ -20,7 +20,7 @@ router.delete('/',async(req,res)=>{
     })
     // delete all mongo data
     await Key.deleteMany({email:email}) 
-    res.status(200).json({message:"all key remove"})
+    res.status(200).json({message:"All Key Removed"})
 
 }
     catch(error)
