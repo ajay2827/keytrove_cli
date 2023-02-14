@@ -14,11 +14,6 @@ router.post('/',async(req,res)=>{
             email:email
         }
         const data=await Key.find({ email: email, key: key });
-        if(data.length!==0)
-        {
-          res.status(400).json({msg:"key is unique"});
-          return;
-        }
         const keydata = await Key.create(NewData);
         // console.log(keydata);
         if ( ttl == -1 ) {

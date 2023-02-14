@@ -5,7 +5,7 @@ const path = require('path');
 const chalk = require('chalk') ;
 const log = console.log ;
 
-const UpDate = async (qkey, data) => {
+const UpDate = async (id, data) => {
     const filePath=path.join(__dirname+'/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
@@ -17,7 +17,7 @@ const UpDate = async (qkey, data) => {
         "value":data.value,
         'ttl':data.ttl,
         "authtoken":authtoken,
-        "qkey":qkey
+        "id":id
     }
     try {
         

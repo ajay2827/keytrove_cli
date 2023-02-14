@@ -19,7 +19,7 @@ const Get = async (key) => {
     try {
          await axios.post(getpath,data).
           then((res)=>{
-              log(chalk.green.bold(res.data.key) + ' --> ' + chalk.yellow(res.data.value));
+              log(chalk.green.bold(res.data.key) + ' --> ' + chalk.yellow(res.data.value) + `    id : ${res.data._id}`);
              
              process.exit(0);
           })

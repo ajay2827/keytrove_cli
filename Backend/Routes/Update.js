@@ -6,10 +6,16 @@ const authFunction = require('../auth')
 
 router.put('/',async(req,res)=>{
     try{
-        const {key,value,ttl,authtoken,qkey}=req.body;
+        const {key,value,ttl,authtoken,id}=req.body;
         const email=await authFunction(authtoken)
-        const features = await Key.find({key:qkey , email:email}) ;
+        const features = await Key.find({_id:id , email:email}) ;
         if (features.length === 0) {
+            console.info('Enter a valid id ');
+            res.status(400).json({ msg: 'Enter a valid id' })
+            return;
+        }
+        const val = await client.get(features[0]._id);
+        if ( val != 1 ) {
             console.info('Enter a valid id ');
             res.status(400).json({ msg: 'Enter a valid id' })
             return;
