@@ -73,11 +73,11 @@ program
 // .action(()=>UpdateList())
 
 program
-.command('update <qkey>')
+.command('update <id>')
 .alias('u')
 .description('update a key-value of user')
-.action(qkey=>{
-  prompt(question_keyvalue).then(ans=>UpDate(qkey,ans))
+.action(id=>{
+  prompt(question_keyvalue).then(ans=>UpDate(id,ans))
 })
 
 // program
@@ -87,10 +87,10 @@ program
 // .action(()=>UpdateList())
 
 program
-.command('remove <qkey>')
+.command('remove <id>')
 .alias('r')
 .description('remove key-value of user')
-.action(qkey=>Delete(qkey))
+.action(id=>Delete(id))
 
 program
 .command('removeall')

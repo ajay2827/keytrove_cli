@@ -7,7 +7,7 @@ const authFunction = require('../auth');
 router.delete('/',async(req,res)=>{
     try
     {
-        const {authtoken,qkey}=req.body;
+        const {authtoken}=req.body;
         const email=await authFunction(authtoken);
         const features=await Key.find({email:email})
         if (features.length === 0) {

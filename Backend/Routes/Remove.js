@@ -6,10 +6,10 @@ const authFunction = require('../auth');
 
 router.delete('/',async(req,res)=>{
     try{
-        const {authtoken,qkey}=req.body;
+        const {authtoken,id}=req.body;
         const email=await authFunction(authtoken);
        
-        const feature=await Key.find({email:email, key:qkey})
+        const feature=await Key.find({email:email, _id:id})
         if (feature.length === 0) {
             console.info('Enter a valid key ');
             res.status(400).json({ msg: 'Enter a valid key' })
@@ -20,9 +20,11 @@ router.delete('/',async(req,res)=>{
                 await client.del(`${feature._id}`) ;
             }else {
                 res.status(200).json({message:"Key Not Found"}) ;
+                await Key.deleteOne({email:email ,_id:id});
+                return ;
             }
-            await Key.deleteOne({email:email ,key:qkey});
-            res.status(200).json({message:"key remove"})
+            await Key.deleteOne({email:email ,_id:id});
+            res.status(200).json({message:"key removed"})
     }
     catch(error)
     {
