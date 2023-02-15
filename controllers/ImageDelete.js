@@ -18,17 +18,13 @@ const Delete = async (qkey) => {
         }).
             then((res) => {
                 log(chalk.green("Image Deleted ")) ;
-                const fun = () => {
                     process.exit(0);
-                }
-                setTimeout(fun, 1000);
+                
             })
     } catch (error) {
         log(chalk.yellow(error.response.data.msg));
-        const fun = () => {
-            process.exit(0);
-        }
-        setTimeout(fun, 1000);
+            process.exit(1);
+        
     }
 }
 

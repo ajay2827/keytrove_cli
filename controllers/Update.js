@@ -29,6 +29,7 @@ const UpDate = async (id, data) => {
 
     } catch (error) {
         log(chalk.bgRed.bold(error.response.data.msg));
+        process.exit(1);
     }
 
 }

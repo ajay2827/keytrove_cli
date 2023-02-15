@@ -19,10 +19,12 @@ const SignUp = async (user) => {
       });
     })
     log(chalk.bgGreen.bold("Successfully Signup"));
+    process.exit(0);
 
   }
   catch (error) {
     log(chalk.red.bold(error.response.data.msg));
+    process.exit(1);
   }
 }
 

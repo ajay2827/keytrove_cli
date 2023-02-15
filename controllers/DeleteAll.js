@@ -25,7 +25,7 @@ const DeleteAll=async()=>{
        })
     }catch(error){
         log(chalk.bgRed.bold(error.response.data.msg));
-        process.exit(0);
+        process.exit(1);
     }
 }
 
