@@ -25,8 +25,8 @@ const GetAll=async()=>{
       })
     process.exit(0);
     } catch (error) {
-      // log(error);
       log(chalk.cyan.bold(error.response.data.msg));
+      process.exit(1);
     }
 
 }

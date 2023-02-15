@@ -25,10 +25,8 @@ const Delete = async (id) => {
             })
     } catch (error) {
         log(chalk.red.bold(error.response.data.msg));
-        const fun = () => {
-            process.exit(0);
-        }
-        setTimeout(fun, 1000);
+            process.exit(1);
+        
     }
 }
 

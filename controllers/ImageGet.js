@@ -3,7 +3,6 @@ const fs = require('fs');
 const axios = require( 'axios' );
 const path=require('path')
 const chalk = require('chalk') ;
-const { response } = require('express');
 const log = console.log ;
 const Downloader = require("nodejs-file-downloader");
 const homeDir = require('os').homedir();
@@ -40,8 +39,10 @@ const ImageGet = async (key) => {
               log(chalk.hex('#FF69B4')('Image ')+chalk.hex('#f2ba49')(res.data.key) + chalk.hex('#FF69B4')(" Downloaded "));
             //  log(res)
           })
+          process.exit(0);
     } catch (error) {
         console.log(error)
+        process.exit(1);
         // log(chalk.yellow(error.response.data.msg));
 
     }
