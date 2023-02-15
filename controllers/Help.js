@@ -20,7 +20,7 @@ const Helpcommand = () =>{
     log(chalk.hex('#f2ba49').bold("   5. ") + chalk.green("keystore remove <id> , keystore r <id>  ")+ chalk.hex('#FF69B4')("For Removing Any Key")) ;
     log(chalk.hex('#f2ba49').bold("   6. ") + chalk.green("keystore imgUpload , keystore k ")+ chalk.hex('#FF69B4')("For Uploading Any Image")) ;
     log(chalk.hex('#f2ba49').bold("   7. ") + chalk.green("keystore imageGet <key> , keystore g <key> ")+ chalk.hex('#FF69B4')("For Getting Any Image correspondence Name")) ;
-    log(chalk.hex('#f2ba49').bold("   8. ") + chalk.green("keystore imageGetAll , keystore l  ")+ chalk.hex('#FF69B4')("For Getting All Uploaded Images")) ;
+    log(chalk.hex('#f2ba49').bold("   8. ") + chalk.green("keystore listimagename , keystore l  ")+ chalk.hex('#FF69B4')("For Getting All Uploaded Images")) ;
     log(chalk.hex('#f2ba49').bold("   9. ") + chalk.green("keystore imageDelete <image_key> , keystore l <image_key> ")+ chalk.hex('#FF69B4')("For deleting any Image Correspondence  Image name")) ;
    log(" ") ;
 

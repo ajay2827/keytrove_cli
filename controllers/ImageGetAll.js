@@ -19,7 +19,7 @@ const ImageGetAll=async()=>{
       await axios.post(listpath,data).
       then((res)=>{
         const images=res.data;
-        log(chalk.green("Images Name --> "));
+        log(chalk.green("Images Names --> "));
         images.map((img)=>{
             log(chalk.cyan(img.img_name)) ;
         })

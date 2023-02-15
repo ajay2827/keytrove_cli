@@ -26,6 +26,7 @@ const ImageUpload = async (data) => {
         "img_path":data.path,
         "authtoken":authtoken
     }
+    console.log(data1)
     try {
        await axios.post(imgPath,data1).
        then((res)=>{
