@@ -6,7 +6,6 @@ const KeysSchema= new mongoose.Schema(
         {
             type:String,
             required:[true,'Key is required'],
-            unique:[true,'key is unique']
         },
         value:
         {

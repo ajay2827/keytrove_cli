@@ -18,10 +18,12 @@ const SignIn = async (user) =>{
       });
     })
     log(chalk.green.bold("Successfully SignIn"));
+    process.exit(0);
 
   }
   catch (error) {
     log(chalk.red.bold(error.response.data.msg));
+    process.exit(1);
   }
 }
 

@@ -17,8 +17,6 @@ const ImageGetAll=require('./controllers/ImageGetAll')
 const ImageDelete=require('./controllers/ImageDelete')
 const { question_signin , question_signup , question_keyvalue,question_image} = require('./question')
 
-//  connectDB()
-
 
 program
 .version('1.0.0')
@@ -66,31 +64,21 @@ program
 .description('getting all key-value of user')
 .action(()=>GetAll());
 
-// program
-// .command('updatelist')
-// .alias('ul')
-// .description('give list of updated key-value')
-// .action(()=>UpdateList())
 
 program
-.command('update <qkey>')
+.command('update <id>')
 .alias('u')
 .description('update a key-value of user')
-.action(qkey=>{
-  prompt(question_keyvalue).then(ans=>UpDate(qkey,ans))
+.action(id=>{
+  prompt(question_keyvalue).then(ans=>UpDate(id,ans))
 })
 
-// program
-// .command('removelist')
-// .alias('rl')
-// .description('give list of key-value want to remove')
-// .action(()=>UpdateList())
 
 program
-.command('remove <qkey>')
+.command('remove <id>')
 .alias('r')
 .description('remove key-value of user')
-.action(qkey=>Delete(qkey))
+.action(id=>Delete(id))
 
 program
 .command('removeall')

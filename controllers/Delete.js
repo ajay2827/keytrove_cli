@@ -5,7 +5,7 @@ const path = require('path');
 const chalk = require('chalk') ;
 const log = console.log ;
 
-const Delete = async (qkey) => {
+const Delete = async (id) => {
     const filePath = path.join(__dirname + '/authStorage/authToken.txt')
     const authtoken = fs.readFileSync(filePath, 'utf8')
     if(!authtoken){
@@ -14,7 +14,7 @@ const Delete = async (qkey) => {
     }
     try {
         await axios.delete(removepath,{
-            data:{"authtoken":authtoken,"qkey": qkey}
+            data:{"authtoken":authtoken,"id": id}
         }).
             then((res) => {
                 log(chalk.blue("key deleted"));
@@ -25,10 +25,8 @@ const Delete = async (qkey) => {
             })
     } catch (error) {
         log(chalk.red.bold(error.response.data.msg));
-        const fun = () => {
-            process.exit(0);
-        }
-        setTimeout(fun, 1000);
+            process.exit(1);
+        
     }
 }
 

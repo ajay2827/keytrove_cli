@@ -7,7 +7,7 @@ const authFunction = require('../auth');
 router.delete('/',async(req,res)=>{
     try
     {
-        const {authtoken,qkey}=req.body;
+        const {authtoken}=req.body;
         const email=await authFunction(authtoken);
         const features=await Key.find({email:email})
         if (features.length === 0) {
@@ -20,7 +20,7 @@ router.delete('/',async(req,res)=>{
     })
     // delete all mongo data
     await Key.deleteMany({email:email}) 
-    res.status(200).json({message:"all key remove"})
+    res.status(200).json({message:"All Key Removed"})
 
 }
     catch(error)

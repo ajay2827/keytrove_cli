@@ -20,12 +20,13 @@ const GetAll=async()=>{
       then((res)=>{
         const features=res.data;
         features.map((fea)=>{
-          log(chalk.green.bold(fea.key) + ' --> ' + chalk.yellow(fea.value));
+          log(chalk.green.bold(fea.key) + ' --> ' + chalk.yellow(fea.value) + `  id : ${fea._id}`);
         })
       })
     process.exit(0);
     } catch (error) {
       log(chalk.cyan.bold(error.response.data.msg));
+      process.exit(1);
     }
 
 }
