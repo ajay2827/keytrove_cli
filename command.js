@@ -81,7 +81,7 @@ program
 .action(id=>Delete(id))
 
 program
-.command('removeall')
+.command('remove-All')
 .alias('rl')
 .description('remove all key-value of user')
 .action(()=>DeleteAll())
@@ -93,7 +93,7 @@ program
 .action(()=>Help());
 
 program
-.command('imgUpload')
+.command('img-Upload')
 .alias('k')
 .description('Img Uploading')
 .action(()=>{
@@ -101,19 +101,19 @@ program
 }) ;
 
 program
-.command('imageGet <key>')
+.command('img-Get <key>')
 .alias('g')
 .description('getting Image URL')
 .action(key=>ImageGet(key))
 
 program
-.command('listimagename')
+.command('img-GetAll')
 .alias('l')
 .description('Getting all Image keys')
 .action(()=>ImageGetAll());
 
 program
-.command('imageDelete <qkey>')
+.command('img-Delete <qkey>')
 .alias('r')
 .description('Image Delete')
 .action(qkey=>ImageDelete(qkey))
