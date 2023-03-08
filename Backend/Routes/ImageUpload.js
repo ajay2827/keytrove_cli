@@ -24,7 +24,8 @@ router.post('/',async (req,res)=>{
         return;
         }
     // const filePath='C:/Users/abhin/Desktop/123.png'
-  cloudinary.uploader.upload(img_path,resource_type=>raw,async (err,result)=>{
+    console.log(img_path)
+  cloudinary.uploader.upload(img_path,async (err,result)=>{
     if(err){
         console.info(err);
         res.status(400).json({ msg: 'An error occured while uploading file' })
@@ -48,7 +49,7 @@ router.post('/',async (req,res)=>{
 catch(error)
 {
     console.log(error);
-    process.exit(0);
+    // process.exit(0);
 }
 })
 module.exports=router

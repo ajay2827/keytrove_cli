@@ -28,7 +28,7 @@ const Set = async (data) => {
     }
     catch (error) {
         log(chalk.cyan.bold(error.response.data.msg));
-        process.exit(0);
+        process.exit(1);
     }
 
 }

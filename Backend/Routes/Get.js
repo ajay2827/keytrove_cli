@@ -24,36 +24,8 @@ router.post('/',async(req,res)=>{
             await Key.deleteOne({email:email ,_id:`${features[0]._id}`});
             res.status(400).json({msg:"key is not present"});
         }
-
-
-        // const newfeature = [] ;
-           
-        //     features.map( async(feature) => {
-        //     const val = await client.get(`${feature._id}`) ;          
-        //     if ( val == 1 ) {
-        //         console.log(feature);
-        //         newfeature.push(feature);
-        //     }
-        // })
        
-        // const fun=async()=>{
-        //     const email=await authFunction(authtoken);
-        //     console.log(email);
-        //     if(newfeature.length!==0)
-        //     {
-        //         res.status(400).json(newfeature);
-        //         return;
-        //     }
-        //     else
-        //     {
-        //         res.status(400).json({msg:"key is not present"});
-        //         return;
-        //     }
-        // }
-        // fun();
-
-
-
+        
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ msg: error.message });
