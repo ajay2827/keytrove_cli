@@ -4,7 +4,6 @@ const { log } = require('console');
 const path=require('path')
 const fs=require('fs')
 const chalk = require('chalk') ;
-const log = console.log ;
 
  
 const ImageUpload = async (data) => {
@@ -19,7 +18,7 @@ const ImageUpload = async (data) => {
         "img_path":data.path,
         "authtoken":authtoken
     }
-    console.log(data1)
+    // console.log(data1)
     try {
        await axios.post(imgPath,data1).
        then((res)=>{
