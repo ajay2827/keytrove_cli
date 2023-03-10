@@ -11,17 +11,19 @@ const SignIn = async (user) =>{
     then(async (res)=>{
       const token = res.data.authtoken
       const filePath=path.join(__dirname+'/authStorage/authToken.txt')
-      fs.writeFile(filePath, token, (err) => {
+      fs.writeFileSync(filePath, token, (err) => {
         if (err)
         log(chalk.red.bold('SignIn Again '))
           return;
       });
     })
     log(chalk.green.bold("Successfully SignIn"));
+    process.exit(0);
 
   }
   catch (error) {
     log(chalk.red.bold(error.response.data.msg));
+    process.exit(1);
   }
 }
 

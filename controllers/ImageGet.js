@@ -23,9 +23,7 @@ const ImageGet = async (key) => {
          await axios.post(getpath,data).
           then((res)=>{
             (async () => {
-              console.log(homeDir)
-                const DirPath=`${homeDir}/onedrive/Desktop/KeyStoreImages`;
-                console.log(DirPath);
+                const DirPath=`${homeDir}/KeyStoreImages`;
                 const downloader = new Downloader({
                   url: res.data.URL, 
                   directory: DirPath,

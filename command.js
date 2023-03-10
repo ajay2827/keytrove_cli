@@ -17,8 +17,6 @@ const ImageGetAll=require('./controllers/ImageGetAll')
 const ImageDelete=require('./controllers/ImageDelete')
 const { question_signin , question_signup , question_keyvalue,question_image} = require('./question')
 
-//  connectDB()
-
 
 program
 .version('1.0.0')
@@ -66,11 +64,6 @@ program
 .description('getting all key-value of user')
 .action(()=>GetAll());
 
-// program
-// .command('updatelist')
-// .alias('ul')
-// .description('give list of updated key-value')
-// .action(()=>UpdateList())
 
 program
 .command('update <id>')
@@ -80,11 +73,6 @@ program
   prompt(question_keyvalue).then(ans=>UpDate(id,ans))
 })
 
-// program
-// .command('removelist')
-// .alias('rl')
-// .description('give list of key-value want to remove')
-// .action(()=>UpdateList())
 
 program
 .command('remove <id>')
@@ -93,7 +81,7 @@ program
 .action(id=>Delete(id))
 
 program
-.command('removeall')
+.command('remove-All')
 .alias('rl')
 .description('remove all key-value of user')
 .action(()=>DeleteAll())
@@ -105,7 +93,7 @@ program
 .action(()=>Help());
 
 program
-.command('imgUpload')
+.command('img-Upload')
 .alias('k')
 .description('Img Uploading')
 .action(()=>{
@@ -113,19 +101,19 @@ program
 }) ;
 
 program
-.command('imageGet <key>')
+.command('img-Get <key>')
 .alias('g')
 .description('getting Image URL')
 .action(key=>ImageGet(key))
 
 program
-.command('listimagename')
+.command('img-GetAll')
 .alias('l')
 .description('Getting all Image keys')
 .action(()=>ImageGetAll());
 
 program
-.command('imageDelete <qkey>')
+.command('img-Delete <qkey>')
 .alias('r')
 .description('Image Delete')
 .action(qkey=>ImageDelete(qkey))

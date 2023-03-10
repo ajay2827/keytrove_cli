@@ -27,6 +27,7 @@ const ImageGetAll=async()=>{
     process.exit(0);
     } catch (error) {
       log(chalk.yellow(error.response.data.msg));
+      process.exit(1);
     }
 
 }
